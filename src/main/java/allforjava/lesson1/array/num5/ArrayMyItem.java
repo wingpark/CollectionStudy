@@ -14,11 +14,43 @@
  */
 package allforjava.lesson1.array.num5;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class ArrayMyItem {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	// 随机生成n个MyItem对象
+	public static MyItem[] radomBuildMyItems(int n) {
+		Random rdm = new Random(n);
+		MyItem[] ms = new MyItem[n];
+		for (int i = 0; i < n; i++) {
+			ms[i] = new MyItem();
+			ms[i].type = (byte) rdm.nextInt();
+			ms[i].color = (byte) rdm.nextInt();
+			ms[i].price = (byte) rdm.nextInt();
+		}
+		return ms;
+	}
 
+	public static void main(String[] args) {
+		int n = 3;
+		MyItem[] ms = radomBuildMyItems(3);
+		ByteStore store = new ByteStore();
+		for (int i = 0; i < n; i++) {
+			store.putMyItem(i, ms[i]);
+		}
+		// 放
+		for (int i = 0; i < n; i++) {
+			store.putMyItem(i, ms[i]);
+		}
+
+		// 取
+		MyItem[] msNew = new MyItem[n];
+		for (int i = 0; i < n; i++) {
+			msNew[i] = store.getMyItem(i);
+		}
+		
+		System.out.println("是否相等："+Arrays.equals(ms, msNew));
 	}
 
 }
